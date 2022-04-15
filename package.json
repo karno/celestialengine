@@ -1,16 +1,66 @@
 {
   "name": "celestialengine",
   "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Render the universe at your React website, based on threejs and react-three-fiber.",
+  "keywords": [
+    "planetarium",
+    "astronomy",
+    "celestial",
+    "celestian"
+  ],
+  "author": "Karno (https://github.com/karno)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/karno/celestialengine.git"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist",
+    "data",
+    "scripts"
+  ],
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "getstardb": "cd scripts/genstardb && poetry install && poetry run python -m src.stars -o ../../dist"
+    "ts-types": "tsc --emitDeclarationOnly --outDir dist",
+    "build": "rimraf dist && node ./esbuild.mjs && npm run ts-types",
+    "buildstardb": "cd scripts/genstardb && poetry install && poetry run python -m src.stars -o ../../data",
+    "fetchstardb": "cd scripts/genstardb && poetry install && poetry run python -m src.stars -o ../../../../public",
+    "copystardb": "cpx -C data/* ./public"
   },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
   "devDependencies": {
+    "@react-three/fiber": "^8.0.10",
+    "@react-three/postprocessing": "^2.3.2",
+    "@types/react": "^17",
+    "@types/three": "^0.139.0",
+    "@typescript-eslint/eslint-plugin": "^5.19.0",
+    "@typescript-eslint/parser": "^5.19.0",
+    "astronomy-bundle": "^7.5.3",
+    "cpx": "^1.5.0",
+    "esbuild": "^0.14.36",
+    "esbuild-node-externals": "^1.4.1",
+    "eslint": "^8.13.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.4.0",
+    "react": "^18",
+    "react-dom": "^18.0.0",
+    "rimraf": "^3.0.2",
+    "three": "^0.139.2",
+    "troika-three-text": "^0.46.4",
     "typescript": "^4.6.3"
+  },
+  "peerDependencies": {
+    "@react-three/fiber": "^8.0.10",
+    "@react-three/postprocessing": "^2.3.2",
+    "astronomy-bundle": "^7.5.3",
+    "react": "^18",
+    "react-dom": "^18.0.0",
+    "three": "^0.139.2",
+    "troika-three-text": "^0.46.4"
   }
 }

@@ -1,5 +1,8 @@
 # celestialengine🪐
 
+[![npm version](https://badge.fury.io/js/celestialengine.svg)](https://badge.fury.io/js/celestialengine)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 _The universe, at your site._
 
 demo: https://celestian.io/engine

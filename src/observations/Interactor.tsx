@@ -1,5 +1,5 @@
 import { Camera, useThree } from "@react-three/fiber";
-import { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { Vector3 } from "three";
 import { InternationalizationProps } from "..";
 import { cos, deg, rad, Radian, sin } from "../core/basic";

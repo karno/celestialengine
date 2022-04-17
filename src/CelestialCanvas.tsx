@@ -1,6 +1,6 @@
 import { Canvas, Props as CanvasProps } from "@react-three/fiber";
 import React, { forwardRef, ReactNode, useEffect, useState } from "react";
-import { useCelestialEngine } from "./contexts";
+import { useCelestialEngine } from ".";
 import { Interactor, InteractorProps } from "./observations/Interactor";
 import { Observer, ObserverProps } from "./observations/Observer";
 import { CelestialEngineProps } from "./properties";

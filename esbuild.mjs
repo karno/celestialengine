@@ -3,11 +3,8 @@ import { nodeExternalsPlugin } from "esbuild-node-externals";
 
 esbuild.build({
   entryPoints: ["src/index.ts"],
-  outdir: "dist/esm",
+  outfile: "dist/index.js",
   bundle: true,
-  sourcemap: true,
-  minify: true,
-  splitting: true,
   format: "esm",
   target: "esnext",
   plugins: [nodeExternalsPlugin()],
@@ -15,10 +12,8 @@ esbuild.build({
 
 esbuild.build({
   entryPoints: ["src/index.ts"],
-  outdir: "dist/cjs",
+  outfile: "dist/index.cjs.js",
   bundle: true,
-  sourcemap: true,
-  minify: true,
   format: "cjs",
   target: "esnext",
   plugins: [nodeExternalsPlugin()],

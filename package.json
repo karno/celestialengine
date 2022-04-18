@@ -17,10 +17,12 @@
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "bin": {
+    "get-star-db": "dist-scripts/download.sh"
+  },
   "files": [
     "dist",
-    "data",
-    "scripts"
+    "dist-scripts"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -28,9 +30,6 @@
     "star-db": "scripts/build.sh",
     "build": "rimraf dist && node ./esbuild.mjs && npm run ts-types",
     "full-build": "build && star-db"
-  },
-  "bin": {
-    "get-star-db": "scripts/download.sh"
   },
   "dependencies": {
     "astronomy-bundle": ">=7.5.3",

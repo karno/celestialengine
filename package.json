@@ -25,9 +25,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "ts-types": "tsc --emitDeclarationOnly --outDir dist",
+    "star-db": "scripts/build.sh",
     "build": "rimraf dist && node ./esbuild.mjs && npm run ts-types",
-    "buildstardb": "cd scripts/genstardb && poetry install && poetry run python -m src.stars -o ../../data",
-    "fetchstardb": "cd scripts/genstardb && poetry install && poetry run python -m src.stars -o ../../../../public"
+    "full-build": "build && star-db"
+  },
+  "bin": {
+    "get-star-db": "scripts/download.sh"
   },
   "dependencies": {
     "astronomy-bundle": ">=7.5.3",
@@ -50,6 +53,7 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.4.0",
+    "license-checker": "^25.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.0",
     "rimraf": "^3.0.2",

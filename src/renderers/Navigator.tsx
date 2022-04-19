@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import { Color } from "three";
 import { deg, ObservationProps, RepresentationProps, UniverseProps } from "..";
 import { getStarRaDec } from "../core/stars";

@@ -23,7 +23,7 @@ import { CelestialEngineContextProps } from "./contextProperties";
 
 /**
  * Properties provided from the CelestialEngine Context.
- * @see CelestialEngineContextProvider
+ * @see CelestialEngineProvider
  */
 export interface CelestialEngineContextType {
   props: CelestialEngineContextProps;
@@ -32,11 +32,10 @@ export interface CelestialEngineContextType {
   internalProps: CelestialEngineProps;
 }
 
-const CelestialEngineContext = createContext<CelestialEngineContextType | null>(
-  null
-);
+export const CelestialEngineContext =
+  createContext<CelestialEngineContextType | null>(null);
 
-export const useCelestialEngineContext = () => {
+export const useCelestialEngine = () => {
   const context = useContext(CelestialEngineContext);
   if (context == null) {
     throw new Error(
@@ -52,7 +51,7 @@ const normalizeAzimuth = (azimuth: Degree): Degree =>
 const normalizeAltitude = (altitude: Degree): Degree =>
   deg(Math.max(-90, Math.min(90, altitude)));
 
-export interface CelestialEngineContextProviderProps {
+export interface CelestialEngineProviderProps {
   /**
    * source of star metadata.
    */
@@ -72,11 +71,11 @@ export interface CelestialEngineContextProviderProps {
 /**
  * Implementation shorthand to provide and handle props for CelestialCanvas.
  */
-export const CelestialEngineContextProvider = ({
+export const CelestialEngineProvider = ({
   metadataSource,
   initialProps,
   children,
-}: CelestialEngineContextProviderProps) => {
+}: CelestialEngineProviderProps) => {
   const [props, setProps] = useState<CelestialEngineContextProps>({
     stars: {},
     ...initialProps,

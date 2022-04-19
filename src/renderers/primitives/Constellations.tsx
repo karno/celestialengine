@@ -1,11 +1,11 @@
 import { extend, ReactThreeFiber } from "@react-three/fiber";
 import React, { useEffect, useMemo } from "react";
 import { Color } from "three";
-import { LineMaterial } from "three/examples/jsm/lines/LineMaterial";
-import { LineSegments2 } from "three/examples/jsm/lines/LineSegments2";
-import { LineSegmentsGeometry } from "three/examples/jsm/lines/LineSegmentsGeometry";
 import { CONSTELLATIONS, CONSTELLATION_KEY } from "../../core/constellations";
 import { calcStarPositions, StarDict, StarPosition } from "../../core/stars";
+import { LineMaterial } from "../../threejs-examples/LineMaterial";
+import { LineSegments2 } from "../../threejs-examples/LineSegments2";
+import { LineSegmentsGeometry } from "../../threejs-examples/LineSegmentsGeometry";
 
 extend({ LineSegments2, LineMaterial });
 

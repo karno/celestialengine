@@ -1,10 +1,10 @@
 import { extend, ReactThreeFiber, useFrame } from "@react-three/fiber";
 import React, { forwardRef, useEffect, useMemo, useRef } from "react";
 import { Color, Quaternion } from "three";
-import { LineMaterial } from "three/examples/jsm/lines/LineMaterial";
-import { LineSegments2 } from "three/examples/jsm/lines/LineSegments2";
-import { LineSegmentsGeometry } from "three/examples/jsm/lines/LineSegmentsGeometry";
 import { Degree, degToRad, getGreenwichSiderealTime } from "../../core/basic";
+import { LineMaterial } from "../../threejs-examples/LineMaterial";
+import { LineSegments2 } from "../../threejs-examples/LineSegments2";
+import { LineSegmentsGeometry } from "../../threejs-examples/LineSegmentsGeometry";
 import {
   quaternionFromAxisAngle,
   VECTOR3_X,

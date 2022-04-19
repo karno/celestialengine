@@ -1,6 +1,6 @@
 {
   "name": "celestialengine",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Render the universe at your React website, based on threejs and react-three-fiber.",
   "keywords": [
     "planetarium",

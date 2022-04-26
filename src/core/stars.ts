@@ -133,11 +133,30 @@ export const calcStarPositions = (
 
 /**
  * Default (built-in) known star names.
- * Derived from: https://www.cosmos.esa.int/web/hipparcos/common-star-names
+ * Star definitions are derived from: https://www.cosmos.esa.int/web/hipparcos/common-star-names
  */
 export const DEFAULT_KNOWN_STAR_NAMES: {
   [key: number]: string;
 } = {
+  // Solar & Planets in the Solar Systems
+  "-1": "Sun",
+  "-2": "Mercury",
+  "-3": "Venus",
+  "-4": "Earth", // not used yet
+  "-5": "Mars",
+  "-6": "Jupiter",
+  "-7": "Saturn",
+  "-8": "Uranus",
+  "-9": "Neptune",
+  // Dwarf Planets
+  "-10": "Pluto",
+  "-11": "Eris",
+  "-12": "Ceres",
+  "-13": "Makemake",
+  "-14": "Haumea",
+  // Other special astronomical objects
+  "-100": "Moon",
+  // Stars
   677: "Alpheratz",
   746: "Caph",
   1067: "Algenib",

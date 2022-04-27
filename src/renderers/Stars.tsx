@@ -43,15 +43,15 @@ const STARS_F_SHADER = `
     gl_FragColor = vec4(vec3(1.0) * vColor, vOpacity); // * (1.0 - sqrt(d)));
 	}`;
 
-export type StarRendererProps = Required<UniverseProps>;
+export type StarsProps = Required<UniverseProps>;
 
-export const StarRenderer = ({
+export const Stars = ({
   universeClock,
   stars,
   sphereRadius,
   vMag,
   starSizeRatio,
-}: StarRendererProps) => {
+}: StarsProps) => {
   const material = useMemo(
     () =>
       new RawShaderMaterial({

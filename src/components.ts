@@ -2,4 +2,4 @@
 export * from "./observations/Interactor";
 export * from "./observations/Observer";
 export * from "./renderers/Navigator";
-export * from "./renderers/StarRenderer";
+export * from "./renderers/Stars";

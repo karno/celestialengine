@@ -6,7 +6,7 @@ import { Observer, ObserverProps } from "./observations/Observer";
 import { CelestialEngineProps } from "./properties";
 import { Effector } from "./renderers/Effector";
 import { Navigator, NavigatorProps } from "./renderers/Navigator";
-import { StarRenderer, StarRendererProps } from "./renderers/StarRenderer";
+import { Stars, StarsProps } from "./renderers/Stars";
 
 export interface CelestialCanvasWithContextProps {
   /**
@@ -85,7 +85,7 @@ export const CelestialCanvas = forwardRef<
     ? { ...useCelestialEngine().internalProps, ...props }
     : props;
 
-  const starRendererProps: StarRendererProps = {
+  const starsProps: StarsProps = {
     universeClock,
     stars,
     sphereRadius,
@@ -141,7 +141,7 @@ export const CelestialCanvas = forwardRef<
   }
   return (
     <Canvas ref={ref} {...canvasProps}>
-      <StarRenderer {...starRendererProps} />
+      <Stars {...starsProps} />
       <Navigator {...navigatorProps} />
       <Observer {...observerProps} />
       <Interactor {...interactorProps} />

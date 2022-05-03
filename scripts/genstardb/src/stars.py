@@ -99,15 +99,15 @@ COLOR_SIG_DIGITS = 4
 class RawStarInfo:
     # hipparcos number of the star
     hip_id: int
-    # right ascention (ICRS), deg
+    # right ascension (ICRS), deg
     ra: float
     # declination (ICRS), deg
     dec: float
     # parallax, milliarcseconds
     parallax: float
-    # proper motion of ra, milliarseconds/year
+    # proper motion of ra, milliarcseconds/year
     pm_ra: float
-    # proper motion of dec, milliarseconds/year
+    # proper motion of dec, milliarcseconds/year
     pm_dec: float
     # magnitude of Johnson V
     v_mag: float
@@ -121,9 +121,9 @@ class OutputStarInfo:
     n: int
     # position (right ascention, declination, and parallax)
     p: tuple[float, float, float]
-    # proper motion, ra and dec, milliarseconds/year
+    # proper motion, ra and dec, milliarcseconds/year
     m: tuple[float, float]
-    # magnitude of Johnson V
+    # visual band magnitude
     v: float
     # star color, linear rgb [0..1]
     c: tuple[float, float, float]

@@ -12,7 +12,7 @@ esbuild.build({
 
 esbuild.build({
   entryPoints: ["src/index.ts"],
-  outfile: "dist/index.cjs.js",
+  outfile: "dist/index.cjs",
   bundle: true,
   format: "cjs",
   target: "esnext",

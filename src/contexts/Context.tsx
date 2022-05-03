@@ -39,7 +39,7 @@ export const useCelestialEngine = () => {
   const context = useContext(CelestialEngineContext);
   if (context == null) {
     throw new Error(
-      "useCelestialEngine() must be used with in the CelestialEngine instance."
+      "useCelestialEngine() must be used with in the CelestialEngineProvider instance."
     );
   }
   return context;
@@ -51,6 +51,9 @@ const normalizeAzimuth = (azimuth: Degree): Degree =>
 const normalizeAltitude = (altitude: Degree): Degree =>
   deg(Math.max(-90, Math.min(90, altitude)));
 
+/**
+ * Properties for @see CelestialEngineProvider .
+ */
 export interface CelestialEngineProviderProps {
   /**
    * source of star metadata.

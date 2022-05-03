@@ -14,7 +14,7 @@ import {
   deg,
   Degree,
   degToRad,
-  getGreenwichSiderealTime,
+  getGASTDeg,
   rad,
   Radian,
 } from "../core/basic";
@@ -148,14 +148,14 @@ const convertTargetStarToRaDec = (
   } as ObservationRaDecTargetProps;
 };
 
-const getCameraQuaternionFromRaDec = (ra: Radian, dec: Radian) =>
+export const getCameraQuaternionFromRaDec = (ra: Radian, dec: Radian) =>
   new Quaternion() // at first, camera is heading the south celestial pole (-Z)
     .multiply(quaternionFromAxisAngle(VECTOR3_X, rad(Math.PI / 2)))
     .multiply(quaternionFromAxisAngle(VECTOR3_Y, rad(ra - Math.PI / 2)))
     .multiply(quaternionFromAxisAngle(VECTOR3_X, dec))
     .normalize();
 
-const getCameraQuaternionFromAzAlt = (
+export const getCameraQuaternionFromAzAlt = (
   universeClock: Date,
   latitude: Degree,
   longitude: Degree,
@@ -167,7 +167,7 @@ const getCameraQuaternionFromAzAlt = (
     .multiply(
       quaternionFromAxisAngle(
         VECTOR3_Z,
-        asRad(deg(getGreenwichSiderealTime(universeClock) + (longitude - 90)))
+        asRad(deg(getGASTDeg(universeClock) + (longitude - 90)))
       )
     )
     // apply latitude

@@ -119,7 +119,7 @@ export const fetchStars = async (
   }
 };
 
-const getRequiredStarsFiles = (
+export const getRequiredStarsFiles = (
   metadata: StarMetadata,
   loadedVmag: number | null,
   requiredVmag: number
@@ -127,7 +127,7 @@ const getRequiredStarsFiles = (
   metadata.files
     .filter(
       ([lower, higher, _f]) =>
-        requiredVmag >= lower && (!loadedVmag || higher >= loadedVmag)
+        requiredVmag >= lower && (!loadedVmag || higher > loadedVmag)
     )
     .sort((a, b) => a[1] - b[1]) // order by higher range of the file
     .map(([_l, _h, file]) => ({ satisfyingVmag: _h, file: file }));
@@ -162,12 +162,20 @@ const fetchMetadata = (url: string) =>
     .then((m) => parseMetadata(m, url));
 
 interface RawStar {
+  // star number
   n: number;
+  // position (right ascention, declination, and parallax)
   p: [number, number, number];
+  // proper motion, ra and dec, milliarcseconds/year
   m: [number, number];
+  // magnitude of Johnson V
   v: number;
+  // star color, linear rgb [0..1]
   c: [number, number, number];
 }
+
+// conversion factor for millarcseconds to degrees.
+const MAS_TO_DEG = 1 / 3600000;
 
 const parseStar = (obj: RawStar, epoch: number): Star => ({
   id: obj.n,
@@ -175,8 +183,8 @@ const parseStar = (obj: RawStar, epoch: number): Star => ({
   dec: degToRad(obj.p[1]),
   parallax: obj.p[2],
   epoch: epoch,
-  pmRa: degToRad(obj.m[0]),
-  pmDec: degToRad(obj.m[1]),
+  pmRa: degToRad(obj.m[0] * MAS_TO_DEG),
+  pmDec: degToRad(obj.m[1] * MAS_TO_DEG),
   vMag: obj.v,
   r: obj.c[0],
   g: obj.c[1],

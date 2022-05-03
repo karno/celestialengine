@@ -53,8 +53,8 @@ export const Interactor = ({
       const last = lastPos.current;
       if (onMove && last) {
         onMove({
-          azimuth: deg(-(localPos.localX - last.localX) / denominator),
-          altitude: deg((localPos.localY - last.localY) / denominator),
+          azimuth: deg(-(localPos.x - last.x) / denominator),
+          altitude: deg((localPos.y - last.y) / denominator),
           originalEvent: ev,
         });
       }
@@ -222,12 +222,12 @@ export const Interactor = ({
   return <></>;
 };
 
-interface LocalPoint {
-  localX: number;
-  localY: number;
+export interface LocalPoint {
+  x: number;
+  y: number;
 }
 
-const getLocalPoints = (ev: MouseEvent | TouchEvent): LocalPoint[] => {
+export const getLocalPoints = (ev: MouseEvent | TouchEvent): LocalPoint[] => {
   const rect = (ev.target as HTMLElement).getBoundingClientRect();
   const client =
     "clientX" in ev
@@ -237,32 +237,33 @@ const getLocalPoints = (ev: MouseEvent | TouchEvent): LocalPoint[] => {
           clientY: t.clientY,
         }));
   return client.map((c) => ({
-    localX: c.clientX - window.scrollX - rect.left,
-    localY: c.clientY - window.scrollY - rect.top,
+    x: c.clientX - window.scrollX - rect.left,
+    y: c.clientY - window.scrollY - rect.top,
   }));
 };
 
-const getNearestLocalPoint = (current: LocalPoint[], last: LocalPoint | null) =>
+export const getNearestLocalPoint = (
+  current: LocalPoint[],
+  last: LocalPoint | null
+) =>
   last
     ? current
         .map((p) => ({
-          ...p,
-          d:
-            Math.pow(p.localX - last.localX, 2) +
-            Math.pow(p.localY - last.localY, 2),
+          p,
+          d: Math.pow(p.x - last.x, 2) + Math.pow(p.y - last.y, 2),
         }))
-        .sort((a, b) => a.d - b.d)[0]
+        .sort((a, b) => a.d - b.d)[0].p
     : current[0];
 
-const toRaDec = (
+export const toRaDec = (
   pos: LocalPoint,
   rect: { width: number; height: number },
   camera: Camera
 ): [Radian, Radian] => {
   // calculate clicked angle (ra-dec)
   const mouseVec = new Vector3(
-    (pos.localX / rect.width) * 2 - 1,
-    -(pos.localY / rect.height) * 2 + 1,
+    (pos.x / rect.width) * 2 - 1,
+    -(pos.y / rect.height) * 2 + 1,
     1
   );
   const angleVec = mouseVec.unproject(camera).sub(camera.position).normalize();
@@ -281,16 +282,21 @@ const normDec = (dec: Radian) =>
       : dec
   );
 
-const calcDistance = (p0RaDec: [Radian, Radian], p1RaDec: [Radian, Radian]) =>
+export const calcDistance = (
+  p0RaDec: [Radian, Radian],
+  p1RaDec: [Radian, Radian]
+) =>
   Math.pow(
     Math.acos(
       sin(p0RaDec[1]) * sin(p1RaDec[1]) +
-        cos(p0RaDec[1]) * cos(p1RaDec[1]) * cos(rad(p0RaDec[0] - p1RaDec[0]))
+        cos(p0RaDec[1]) *
+          cos(p1RaDec[1]) *
+          cos(rad(Math.abs(p0RaDec[0] - p1RaDec[0])))
     ),
     2
   );
 
-const calcDistanceLine = (
+export const calcDistanceLine = (
   pRaDec: [Radian, Radian],
   l0RaDec: [Radian, Radian],
   l1RaDec: [Radian, Radian]

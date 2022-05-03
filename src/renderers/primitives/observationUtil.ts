@@ -6,11 +6,11 @@ export const setAnimationRefs = <TObj, TParam>(
   objRef: MutableRefObject<TObj | null>,
   paramRef: MutableRefObject<TParam | null>,
   value: TParam,
-  valueSetter: (obj: TObj, param: TParam) => void
+  initializer?: (obj: TObj, param: TParam) => void
 ) => {
   if (objRef.current) {
-    if (!paramRef.current) {
-      valueSetter(objRef.current, value);
+    if (!paramRef.current && initializer) {
+      initializer(objRef.current, value);
     }
     paramRef.current = value;
   } else {

@@ -40,12 +40,12 @@ Before installing components into your page, you have to download & extract star
 ### 2. Install components into your page
 
 ```tsx
-<CelestialEngine
+<CelestialEngineProvider
   metadataSource="./dat_hp_meta.json"
   initialProps={{ vMag: 5.0 }}
 >
   <CelestialCanvas useEngine={true} />
-</CelestialEngine>
+</CelestialEngineProvider>
 ```
 
 ### 3. Control the properties

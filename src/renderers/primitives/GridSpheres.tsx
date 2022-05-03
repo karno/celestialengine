@@ -1,10 +1,12 @@
 import { extend, ReactThreeFiber, useFrame } from "@react-three/fiber";
 import React, { forwardRef, useEffect, useMemo, useRef } from "react";
 import { Color, Quaternion } from "three";
-import { Degree, degToRad, getGreenwichSiderealTime } from "../../core/basic";
-import { LineMaterial } from "../../threejs-examples/LineMaterial";
-import { LineSegments2 } from "../../threejs-examples/LineSegments2";
-import { LineSegmentsGeometry } from "../../threejs-examples/LineSegmentsGeometry";
+import { Degree, degToRad, getGASTDeg } from "../../core/basic";
+import {
+  LineMaterial,
+  LineSegments2,
+  LineSegmentsGeometry,
+} from "../../threejs-examples/";
 import {
   quaternionFromAxisAngle,
   VECTOR3_X,
@@ -160,7 +162,7 @@ const getAzimuthalQuaternion = (
     .multiply(
       quaternionFromAxisAngle(
         VECTOR3_Z,
-        degToRad(getGreenwichSiderealTime(universeClock) + (longitude - 90))
+        degToRad(getGASTDeg(universeClock) + (longitude - 90))
       )
     )
     // apply latitude

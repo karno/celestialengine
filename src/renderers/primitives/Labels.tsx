@@ -17,7 +17,7 @@ import {
   deg,
   Degree,
   degToRad,
-  getGreenwichSiderealTime,
+  getGASTDeg,
   Radian,
 } from "../../core/basic";
 import { calcCelestialPosition } from "../../core/stars";
@@ -315,7 +315,7 @@ const getDirectionLabelQuaternion = (
     .multiply(
       quaternionFromAxisAngle(
         VECTOR3_Z,
-        asRad(deg(getGreenwichSiderealTime(universeClock) + longitude - 90))
+        asRad(deg(getGASTDeg(universeClock) + longitude - 90))
       )
     )
     // apply latitude

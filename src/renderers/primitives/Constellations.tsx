@@ -3,9 +3,11 @@ import React, { useEffect, useMemo } from "react";
 import { Color } from "three";
 import { CONSTELLATIONS, CONSTELLATION_KEY } from "../../core/constellations";
 import { calcStarPositions, StarDict, StarPosition } from "../../core/stars";
-import { LineMaterial } from "../../threejs-examples/LineMaterial";
-import { LineSegments2 } from "../../threejs-examples/LineSegments2";
-import { LineSegmentsGeometry } from "../../threejs-examples/LineSegmentsGeometry";
+import {
+  LineMaterial,
+  LineSegments2,
+  LineSegmentsGeometry,
+} from "../../threejs-examples/";
 
 extend({ LineSegments2, LineMaterial });
 

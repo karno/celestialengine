@@ -24,8 +24,9 @@
     "dist",
     "dist-scripts"
   ],
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "tsc --noEmit && jest",
     "ts-types": "tsc --emitDeclarationOnly --outDir dist",
     "star-db": "scripts/build.sh",
     "build": "rimraf dist && node ./esbuild.mjs && npm run ts-types",
@@ -33,11 +34,14 @@
   },
   "dependencies": {
     "astronomy-bundle": ">=7.5.3",
+    "jest-matcher-deep-close-to": "^3.0.2",
     "troika-three-text": ">=0.46.4"
   },
   "devDependencies": {
     "@react-three/fiber": "^7.0.10",
     "@react-three/postprocessing": "^2.2.0",
+    "@testing-library/react-hooks": "^8.0.0",
+    "@types/jest": "^27.4.1",
     "@types/node": "^17.0.21",
     "@types/react": "^17.0.1",
     "@types/react-dom": "^17.0.2",
@@ -45,6 +49,7 @@
     "@typescript-eslint/eslint-plugin": "^5.19.0",
     "@typescript-eslint/parser": "^5.19.0",
     "esbuild": "^0.14.36",
+    "esbuild-jest": "^0.5.0",
     "esbuild-node-externals": "^1.4.1",
     "eslint": "^8.13.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -52,6 +57,7 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.4.0",
+    "jest": "^27.5.1",
     "license-checker": "^25.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.0",

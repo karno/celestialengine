@@ -47,10 +47,16 @@ export const asDeg = (value: Radian): Degree => radToDeg(value);
 export const sin = (value: Radian) => Math.sin(value);
 export const cos = (value: Radian) => Math.cos(value);
 
-// calculate greenwich apparent sidereal time.
-// https://github.com/andrmoel/astronomy-bundle-js/blob/master/src/time/createTimeOfInterest.ts#L32
-// https://github.com/andrmoel/astronomy-bundle-js/blob/2564ed5c5b5d1f8165cb60a8cc903d96ffa3b745/src/time/calculations/timeCalc.ts#L192
-export const getGreenwichSiderealTime = (universeClock: Date) =>
+/**
+ * calculate greenwich apparent sidereal time.
+ * @param universeClock time of the universe.
+ * @returns degree of greenwich apparent sidereal time.
+ *
+ * This wraps @getGreenWichApparentSiderealTime from astoronomy-bundle.
+ * https://github.com/andrmoel/astronomy-bundle-js/blob/master/src/time/createTimeOfInterest.ts#L32
+ * https://github.com/andrmoel/astronomy-bundle-js/blob/2564ed5c5b5d1f8165cb60a8cc903d96ffa3b745/src/time/calculations/timeCalc.ts#L192
+ */
+export const getGASTDeg = (universeClock: Date) =>
   deg(
     createTimeOfInterest
       .fromDate(universeClock)

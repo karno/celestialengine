@@ -4,16 +4,27 @@ import { AstrometricSecondsInYear, cos, rad, Radian, sin } from "./basic";
  * Star data.
  */
 export interface Star {
+  /** hipparcos star number */
   id: number;
+  /** right ascension, in radian */
   ra: Radian;
+  /** declination, in radian */
   dec: Radian;
+  /** parallax, in milliarcseconds */
   parallax: number;
+  /** unix epoch for proper motion */
   epoch: number;
+  /** RA proper motion, in radian */
   pmRa: Radian;
+  /** DEC proper motion, in radian */
   pmDec: Radian;
+  /** visual band magnitude */
   vMag: number;
+  /** star color, red part */
   r: number;
+  /** star color, green part */
   g: number;
+  /** star color, blue part */
   b: number;
 }
 
@@ -21,9 +32,17 @@ export interface Star {
  * Star metadata.
  */
 export interface StarMetadata {
+  /** metadata source url */
   source: string;
+  /** covered range of Vmag */
   vRange: [number, number];
+  /**
+   * contained files and covered ranges.
+   * [ub, lb, url]
+   * - [ub, lb): the file covers the vMag region.
+   */
   files: [number, number, string][];
+  /** unix epoch for proper motion */
   epoch: number;
 }
 
@@ -84,8 +103,8 @@ export const getStarRaDec = (star: Star, clock: Date): StarRaDec => {
   // calc proper motion
   const unixSec = clock.getTime() / 1000; // getTime returns in millisec, convert to sec
   const passedYears = (unixSec - star.epoch) / AstrometricSecondsInYear;
-  const pm_ra = (star.pmRa * passedYears) / (1000 * 3600);
-  const pm_dec = (star.pmDec * passedYears) / (1000 * 3600);
+  const pm_ra = star.pmRa * passedYears;
+  const pm_dec = star.pmDec * passedYears;
 
   const alpha = rad(star.ra + pm_ra);
   const delta = rad(star.dec + pm_dec);
@@ -110,7 +129,7 @@ export const calcCelestialPosition = (
 };
 
 // this function converts the star position into X-Y-Z coordinate, that is:
-// +Y axis: RA 0h
+// +X axis: RA 0h
 // +Z axis: Celestial Sphere North
 export const calcStarPosition = (
   star: Star,
@@ -132,13 +151,40 @@ export const calcStarPositions = (
   }, {});
 
 /**
+ * Sun & Planets in the Solar System.
+ */
+export const SOLAR_SYSTEM_SPECIALS = {
+  // the Sun and planets
+  SUN: -1,
+  MERCURY: -2,
+  VENUS: -3,
+  EARTH: -4,
+  MARS: -5,
+  JUPITER: -6,
+  SATURN: -7,
+  URANUS: -8,
+  NEPTUNE: -9,
+  // dwarf planets
+  PLUTO: -10,
+  ERIS: -11,
+  CERES: -12,
+  MAKEMAKE: -13,
+  HAUMEA: -14,
+  // ...and the Moon.
+  MOON: -100,
+} as const;
+
+export type SolarSystemSpecials =
+  typeof SOLAR_SYSTEM_SPECIALS[keyof typeof SOLAR_SYSTEM_SPECIALS];
+
+/**
  * Default (built-in) known star names.
  * Star definitions are derived from: https://www.cosmos.esa.int/web/hipparcos/common-star-names
  */
 export const DEFAULT_KNOWN_STAR_NAMES: {
   [key: number]: string;
 } = {
-  // Solar & Planets in the Solar Systems
+  // SOLAR_SYSTEM_SPECIALS
   "-1": "Sun",
   "-2": "Mercury",
   "-3": "Venus",
@@ -148,13 +194,11 @@ export const DEFAULT_KNOWN_STAR_NAMES: {
   "-7": "Saturn",
   "-8": "Uranus",
   "-9": "Neptune",
-  // Dwarf Planets
   "-10": "Pluto",
   "-11": "Eris",
   "-12": "Ceres",
   "-13": "Makemake",
   "-14": "Haumea",
-  // Other special astronomical objects
   "-100": "Moon",
   // Stars
   677: "Alpheratz",

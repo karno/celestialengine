@@ -1,6 +1,6 @@
 {
   "name": "celestialengine",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Render a planetarium at your React website, based on threejs and react-three-fiber.",
   "keywords": [
     "planetarium",
@@ -34,7 +34,6 @@
   },
   "dependencies": {
     "astronomy-bundle": ">=7.5.3",
-    "jest-matcher-deep-close-to": "^3.0.2",
     "troika-three-text": ">=0.46.4"
   },
   "devDependencies": {
@@ -58,6 +57,7 @@
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.4.0",
     "jest": "^27.5.1",
+    "jest-matcher-deep-close-to": "^3.0.2",
     "license-checker": "^25.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.0",

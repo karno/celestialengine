@@ -178,7 +178,19 @@ const createEngineProps = (
   onMove: (event: CelestialMoveEvent) => any,
   onZoom: (event: CelestialZoomEvent) => any
 ): CelestialEngineProps => {
-  const { targetFov, targetStarNumber, ...passProps } = props;
+  const {
+    // capture additional properties to prevent redundant warnings
+    targetFov,
+    targetStarNumber,
+    maxZoom,
+    controllable,
+    selectable,
+    previewOnSelect,
+    previewOnMove,
+    previewOnZoom,
+    // and pass thru remain properties
+    ...passProps
+  } = props;
   return {
     ...passProps,
     target: props.targetStarNumber

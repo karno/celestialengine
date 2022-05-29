@@ -1,4 +1,4 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 import React from "react";
 import {
   CelestialEngineContext,
@@ -8,9 +8,7 @@ import {
 
 describe("test useCelestialEngine behavior", () => {
   test("throw when useCelestialEngine() without the CelestialEngineContext.", () =>
-    expect(
-      () => renderHook(() => useCelestialEngine()).result.current
-    ).toThrow());
+    expect(() => renderHook(() => useCelestialEngine()).result).toThrow());
   test("useCelestialEngine() return the props specified in the CelestialEngineContext.", () => {
     const stub = {} as CelestialEngineContextType;
     expect(
